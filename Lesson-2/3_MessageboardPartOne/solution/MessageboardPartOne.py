@@ -10,9 +10,11 @@ from urllib.parse import parse_qs
 class MessageHandler(BaseHTTPRequestHandler):
     def do_POST(self):
         # 1. How long was the message?
+        # self.headers is like a Map[String,String] where key is case insensitive
         length = int(self.headers.get('Content-length', 0))
 
         # 2. Read the correct amount of data from the request.
+        # reading request body
         data = self.rfile.read(length).decode()
 
         # 3. Extract the "message" field from the request data.
